@@ -38,6 +38,7 @@ class Model {
         this.Problem(sprintf("%X %s %X =", left, op, right));
         this.Answer = sprintf("%X", this.Mode() == 'addition' ? left + right : left * right);
         this.Response('');
+        $('#mainInput').focus();
     }
 }
 

@@ -12,7 +12,7 @@
     <form data-bind="submit: CheckResponse">
         <font size="40" data-bind="text: Problem"></font>
         <font size="40">
-            <input type=text data-bind="value: Response, css: { correct: IsCorrect, incorrect: IsIncorrect }" />
+            <input id="mainInput" type=text data-bind="value: Response, css: { correct: IsCorrect, incorrect: IsIncorrect }" />
         </font>
     </form>
 
