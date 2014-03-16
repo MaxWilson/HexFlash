@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>HexFlash</title>
+    <script src="./js/jquery.js"></script>
+    <script src="./js/knockout-3.1.0.js"></script>
+    <script src="./js/sprintf.js"></script>
+    <script src="./js/HexFlash.js"></script>
+    <link href="./res/styles.css" rel="stylesheet" />
+</head>
+<body>
+    <form data-bind="submit: CheckResponse">
+        <font size="40" data-bind="text: Problem"></font>
+        <font size="40">
+            <input type=text data-bind="value: Response, css: { correct: IsCorrect, incorrect: IsIncorrect }" />
+        </font>
+    </form>
+
+    <label>
+        <input type="radio" name="test" value='addition' data-bind="checked: Mode" />Addition
+    </label>
+    <label>
+        <input type="radio" name="test" value='multiplication' data-bind="checked: Mode" />Multiplication
+    </label>
+    <p>Multi-digit: <input type="checkbox" data-bind="checked: BigNumbers" /></p>
+</body>
+</html>
