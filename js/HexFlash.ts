@@ -18,15 +18,24 @@ class Model {
     IsIncorrect = ko.observable(true);
     IsCorrect = ko.observable(false);
     Mode = ko.observable('addition');
+    AverageTime = ko.observable('Not measured');
     BigNumbers = ko.observable(false);
+    start = Date.now();
+    lags = [];
     constructor() {
         this.Mode.subscribe(() => this.Reset());
         this.BigNumbers.subscribe(() => this.Reset());
     }
     CheckResponse() {
+        var lag = Date.now() - this.start;
+        if (this.lags.length >= 3) {
+            this.lags.shift();
+        }
+        this.lags.push(lag);
         this.IsCorrect(this.Response().toUpperCase() == this.Answer);
         this.IsIncorrect(this.Response().toUpperCase() != this.Answer);  
-        this.Response(this.Answer); 
+        this.Response(this.Answer);
+        this.AverageTime(sprintf("%.3f seconds", this.lags.reduce((a, b) => a + b) / this.lags.length / 1000)); 
         setTimeout(() => this.Reset(), 800);
     }
     Reset() {
@@ -39,6 +48,7 @@ class Model {
         this.Answer = sprintf("%X", this.Mode() == 'addition' ? left + right : left * right);
         this.Response('');
         $('#mainInput').focus();
+        this.start = Date.now();
     }
 }
 

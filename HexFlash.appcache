@@ -1,6 +1,10 @@
 ﻿CACHE MANIFEST
+#v1.061
 index.html
+res/base.css
 res/styles.css
+res/layout.css
+res/skeleton.css
 js/HexFlash.js
 js/jquery.js
 js/knockout-3.1.0.js

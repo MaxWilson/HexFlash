@@ -9,19 +9,26 @@
     <link href="./res/styles.css" rel="stylesheet" />
 </head>
 <body>
-    <form data-bind="submit: CheckResponse">
-        <font size="40" data-bind="text: Problem"></font>
-        <font size="40">
-            <input id="mainInput" type=text data-bind="value: Response, css: { correct: IsCorrect, incorrect: IsIncorrect }" />
-        </font>
-    </form>
-
-    <label>
-        <input type="radio" name="test" value='addition' data-bind="checked: Mode" />Addition
-    </label>
-    <label>
-        <input type="radio" name="test" value='multiplication' data-bind="checked: Mode" />Multiplication
-    </label>
-    <p>Multi-digit: <input type="checkbox" data-bind="checked: BigNumbers" /></p>
+    <div>
+        <div>
+            <form data-bind="submit: CheckResponse">
+                <font size="40" data-bind="text: Problem"></font>
+                <font size="40">
+                    <input id="mainInput" type=text data-bind="value: Response, css: { correct: IsCorrect, incorrect: IsIncorrect }" />
+                </font>
+            </form>
+        </div>
+        <div>
+            <b>Average time:</b>
+            <span data-bind="text: AverageTime"></span>
+        </div>
+        <label>
+            <input type="radio" name="test" value='addition' data-bind="checked: Mode" />Addition
+        </label>
+        <label>
+            <input type="radio" name="test" value='multiplication' data-bind="checked: Mode" />Multiplication
+        </label>
+        <p>Multi-digit: <input type="checkbox" data-bind="checked: BigNumbers" /></p>
+    </div>
 </body>
 </html>

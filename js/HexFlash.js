@@ -17,7 +17,10 @@ var Model = (function () {
         this.IsIncorrect = ko.observable(true);
         this.IsCorrect = ko.observable(false);
         this.Mode = ko.observable('addition');
+        this.AverageTime = ko.observable('Not measured');
         this.BigNumbers = ko.observable(false);
+        this.start = Date.now();
+        this.lags = [];
         this.Mode.subscribe(function () {
             return _this.Reset();
         });
@@ -27,9 +30,17 @@ var Model = (function () {
     }
     Model.prototype.CheckResponse = function () {
         var _this = this;
+        var lag = Date.now() - this.start;
+        if (this.lags.length >= 3) {
+            this.lags.shift();
+        }
+        this.lags.push(lag);
         this.IsCorrect(this.Response().toUpperCase() == this.Answer);
         this.IsIncorrect(this.Response().toUpperCase() != this.Answer);
         this.Response(this.Answer);
+        this.AverageTime(sprintf("%.3f seconds", this.lags.reduce(function (a, b) {
+            return a + b;
+        }) / this.lags.length / 1000));
         setTimeout(function () {
             return _this.Reset();
         }, 800);
@@ -44,6 +55,7 @@ var Model = (function () {
         this.Answer = sprintf("%X", this.Mode() == 'addition' ? left + right : left * right);
         this.Response('');
         $('#mainInput').focus();
+        this.start = Date.now();
     };
     return Model;
 })();
